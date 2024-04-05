@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize');
 const conexao = require('../conexao/conexao');
-const tipoImovel = require('./tipoImovel/modeloTipoImovel');
-const endereco = require('./endereco/modeloEndereco');
+const tipoImovel = require('../tipoImovel/modeloTipoImovel');
+const endereco = require('../endereco/modeloEndereco');
 const Imovel = conexao.define('imovel', {
-    codigo: {
+    codImovel: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -17,21 +17,21 @@ const Imovel = conexao.define('imovel', {
                 type: Sequelize.FLOAT,
                 allowNull: false
             },
-                tipoImovelId: {
+                codTipoImovel: {
                     type: Sequelize.INTEGER,
                     allowNull: false,
                     refereneces: {
                         model: tipoImovel,
-                        key: 'codigo'
+                        key: 'codTipoImovel'
                     },
                     onDelete: false 
                 },
-                    imovelEnderecoId: {
+                    codEndereco: {
                         type: Sequelize.INTEGER,
                         allowNull: false,
                         refereneces: {
                             model: endereco,
-                            key: 'codigo'
+                            key: 'codEndereco'
                         },
                         onDelete: 'CASCADE'
                     }

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 const conexao = new Sequelize('nodejs', 'root', 'root', {
-    host: '127.0.0.1',//Verificar se esta correto
+    host: '127.0.0.1',
     dialect: 'mysql',
     port: '3306'
 });

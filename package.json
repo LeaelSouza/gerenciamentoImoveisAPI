@@ -1,10 +1,9 @@
 {
-  "name": "nodejs_banco_dados",
+  "name": "gerenciamento_de_imoveis_api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

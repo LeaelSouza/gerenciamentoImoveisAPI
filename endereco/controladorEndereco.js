@@ -2,15 +2,13 @@ const express = require('express');
 const router = express.Router();
 const Endereco = require('./modeloEndereco');
 
-
-//Criando endereço
 router.post('/endereco', (requisicao, resposta) => {
     const estado = requisicao.body.estado;
     const cidade = requisicao.body.cidade;
     const bairro = requisicao.body.bairro;
     const rua = requisicao.body.rua;
     const complemento = requisicao.body.complemento;
-    const cep = requisicao.body.cep;
+    const CEP = requisicao.body.cep;
 
         Endereco.create({
             estado:estado,
@@ -18,7 +16,7 @@ router.post('/endereco', (requisicao, resposta) => {
             bairro:bairro,
             rua:rua,
             complemento:complemento,
-            cep:cep
+            cep:CEP
         }).then(() => {
             resposta.send("Cadastrado com sucesso");
         }).catch((erro) => {
@@ -26,14 +24,11 @@ router.post('/endereco', (requisicao, resposta) => {
         });
 });
 
-
-    //Consultando endereços
     router.get('/endereco', async (requisicao, resposta) => {
         const endereco = await Endereco.findAll();
         resposta.send(endereco);
     });
 
-        //Atualizando endereço
         router.put('/endereco/:enderecoId', (requisicao, resposta) =>{
             const codigoEndereco = requisicao.params.enderecoId;
                 const estado = requisicao.body.estado;
@@ -41,7 +36,7 @@ router.post('/endereco', (requisicao, resposta) => {
                 const bairro = requisicao.body.bairro;
                 const rua = requisicao.body.rua;
                 const complemento = requisicao.body.complemento;
-                const cep = requisicao.body.cep;
+                const CEP = requisicao.body.CEP;
 
             Endereco.update({
                 estado:estado,
@@ -49,10 +44,10 @@ router.post('/endereco', (requisicao, resposta) => {
                 bairro:bairro,
                 rua:rua,
                 complemento:complemento,
-                cep:cep
+                CEP:CEP
             }, {
                 where: {
-                    codigo: codigoEndereco
+                    codEndereco: codigoEndereco
                 }
             }).then(() => {
                 resposta.send('Endereço aualizado com sucesso.');
@@ -61,14 +56,13 @@ router.post('/endereco', (requisicao, resposta) => {
             });
         });
 
-            //Deletar endereço
             router.delete('/endereco/:enderecoId', (requisicao, resposta) => {
                 const codigoEndereco = requisicao.params.enderecoId;
-                Endereco.destroy({where: { codigo: codigoEndereco } }).then(() => {
+                Endereco.destroy({where: { codEndereco: codigoEndereco } }).then(() => {
                     resposta.send('Endereço removido com sucesso!');
                 }).catch((erro) => {
                     resposta.send('Ocorreu um erro: ' +erro);
                 });
             });
 
-            module.exports = router();
+            module.exports = router;

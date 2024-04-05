@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const conexao = require('../conexao/conexao');
 const endereco = require('../endereco/modeloEndereco');
 const Cliente = conexao.define('cliente', {
-    codigo: {
+    codCLiente: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -12,12 +12,12 @@ const Cliente = conexao.define('cliente', {
             type: Sequelize.STRING(150),
             allowNull: false
         },
-            cpf: {
+            CPF: {
                 type: Sequelize.CHAR(11),
                 allowNull: false,
                 unique: true
             },
-                cnpj: {
+                CNPJ: {
                     type: Sequelize.CHAR(14),
                     allowNull: true
                 },
@@ -25,12 +25,12 @@ const Cliente = conexao.define('cliente', {
                         type: Sequelize.DATE,
                         allowNull: false
                     },
-                        clienteEnderecoId: {
+                        codEndereco: {
                             type: Sequelize.INTEGER,
                             allowNull: false,
                             references: {
                                 model: endereco,
-                                key: 'codigo'
+                                key: 'codEndereco'
                             }
                         },
                         onDelete: 'CASCADE'

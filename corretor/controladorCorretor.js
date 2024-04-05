@@ -1,42 +1,42 @@
 const express = require('express');
-const Cliente = require('./modeloCliente');
+const Corretor = require('./modeloCorretor');
 
 const router = express.Router();
 
-router.post('/cliente', (requisicao, resposta) => {
+router.post('/corretor', (requisicao, resposta) => {
     const nome = requisicao.body.nome;
     const CPF = requisicao.body.CPF;
     const CNPJ = requisicao.body.CNPJ;
     const dataNascimento = requisicao.body.dataNascimento;
     const codigoClienteEnderecoId = requisicao.body.codEndereco;
 
-    Cliente.create({
+    Corretor.create({
         nome:nome,
         CPF:CPF,
         CNPJ:CNPJ,
         dataNascimento:dataNascimento,
         codEndereco:codigoClienteEnderecoId
     }).then(() => {
-        resposta.send('Cadastrado do cliente concluido com sucesso.');
+        resposta.send('Cadastrado do corretor concluido com sucesso.');
     }).catch((erro) => {
-        resposta.send('Ocorreu um erro ao cadastrar o cliente: ' + erro);
+        resposta.send('Ocorreu um erro ao cadastrar o corretor: ' + erro);
     });
 });
 
-    router.get('/cliente', async (requisicao, resposta) => {
-        const cliente = await Cliente.findAll();
-        resposta.send(cliente);
+    router.get('/corretor', async (requisicao, resposta) => {
+        const corretor = await Corretor.findAll();
+        resposta.send(corretor);
     });
 
-        router.put('/cliente/:clienteId', (requisicao, resposta) => {
-            const codigoCliente = requisicao.params.clienteId;
+        router.put('/corretor/:corretorId', (requisicao, resposta) => {
+            const codcorretor = requisicao.params.corretorId;
             const nome = requisicao.body.nome;
             const CPF = requisicao.body.CPF;
             const CNPJ = requisicao.body.CNPJ;
             const dataNascimento = requisicao.body.dataNascimento;
             const codigoClienteEnderecoId = requisicao.body.codEndereco;
         
-            Cliente.update({
+            Corretor.update({
                 nome:nome,
                 CPF:CPF,
                 CNPJ:CNPJ,
@@ -44,7 +44,7 @@ router.post('/cliente', (requisicao, resposta) => {
                 codEndereco:codigoClienteEnderecoId
             }, {
                 where: {
-                    codCliente: codigoCliente
+                    codCorretor: codcorretor
                 }
             }).then(() => {
                 resposta.send('Atualizado com sucesso.');
@@ -53,12 +53,12 @@ router.post('/cliente', (requisicao, resposta) => {
             });
         });
 
-            router.delete('/cliente/:clienteId', (requisicao, resposta) => {
-                const codigoCliente = requisicao.params.clienteId;
-                Cliente.destroy({ where: { codCliente: codigoCliente } }).then(() => {
-                    resposta.send('Cadastro do cliente excluido com sucesso!');
+            router.delete('/corretor/:corretorId', (requisicao, resposta) => {
+                const codcorretor = requisicao.params.corretorId;
+                Corretor.destroy({ where: { codCorretor: codcorretor } }).then(() => {
+                    resposta.send('Cadastro do corretor excluido com sucesso!');
                 }).catch((erro) => {
-                    resposta.send('Erro ao excluir o cadastro do cliente: ' +erro);
+                    resposta.send('Erro ao excluir o cadastro do corretor: ' +erro);
                 });
             });
 

@@ -3,7 +3,7 @@ const conexao = require('../conexao/conexao');
 const { route } = require('../cliente/controladorCliente');
 const router = require('../cliente/controladorCliente');
 const Endereco = conexao.define('endereco', {
-    codigo: {
+    codEndereco: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -29,7 +29,7 @@ const Endereco = conexao.define('endereco', {
                             type: Sequelize.STRING(50),
                             allowNull: false
                         },
-                            cep: {
+                            CEP: {
                                 type: Sequelize.CHAR(8),
                                 allowNull: false,
                                 unique: true
@@ -42,4 +42,4 @@ Endereco.sync({
    alter: true
 });
 
-modeule.exports = router;
+modeule.exports = Endereco;

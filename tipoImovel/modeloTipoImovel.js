@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const conexao = require('../conexao/conexao');
+const conexao = require('./conexao/conexao');
 const Imovel = conexao.define('tipoImovel', {
-    codigo: {
+    codTipoImovel: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -19,4 +19,4 @@ Imovel.sync({
    alter: true
 });
 
-modeule.exports = Imovel;
+module.exports = Imovel;

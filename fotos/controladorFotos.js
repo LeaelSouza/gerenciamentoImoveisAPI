@@ -2,14 +2,12 @@ const express = require('express');
 const router = express.Router();
 const Foto = require('./modeloFotos');
 
-//Criando foto
 router.post('/foto', (requisicao, resposta) => {
     const chaveAWS = requisicao.body.chaveAWS;
-    const codigofotoImovelId = requisicao.body.fotoImovelId;
-
+    const codigofotoImovelId = requisicao.body.codImovel;
     Foto.Create({
         chaveAWS:chaveAWS,
-        fotoImovelId:codigofotoImovelId
+        codImovel:codigofotoImovelId
     }).then(() => {
         resposta.send('A foto foi cadastrada com sucesso!');
     }).catch((erro) => {
@@ -17,24 +15,22 @@ router.post('/foto', (requisicao, resposta) => {
     });
 });
 
-    //Consultando foto
     router.get('/foto', async (requisicao, respota) => {
         const foto = await Foto.findAll();
         resposta.send(foto);
-    })
+    });
 
-        //Atualizando foto
         router.put('/foto/:fotoId', (requisicao, resposta) => {
             const codigoFoto = requisicao.params.fotoId;
                 const chaveAWS = requisicao.body.chaveAWS;
-                const codigofotoImovelId = requisicao.body.fotoImovelId;
+                const codigofotoImovelId = requisicao.body.codImovel;
 
             Foto.update({
                 chaveAWS:chaveAWS,
-                fotoImovelId:codigofotoImovelId
+                codImovel:codigofotoImovelId
             },{
                 where: {
-                    codigo: codigoFoto
+                    codImagem: codigoFoto
                 }
             }).then(() => {
                 resposta.send('Atualizado com sucesso.');
@@ -43,10 +39,9 @@ router.post('/foto', (requisicao, resposta) => {
             });
         });
 
-                //Deletar foto
                 router.delete('/foto/:fotoId',  (requisicao, resposta) => {
                     const codigoFoto = requisicao.params.fotoId;
-                    Foto.destroy({ where: { cogido: codigoFoto } }).then(() => {
+                    Foto.destroy({ where: { codImagem: codigoFoto } }).then(() => {
                         resposta.send('Cadastro de foto excluida com sucesso!');
                     }).catch((erro) => {
                         resposta.send('Ocorreu um erro ao excluir o cadastro da foto: ' +erro);

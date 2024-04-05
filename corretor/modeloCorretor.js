@@ -1,9 +1,8 @@
 const Sequelize = require('sequelize');
 const conexao = require('../conexao/conexao');
-const Endereco = require('../endereco/modeloEndereco');
-
-const Proprietario = conexao.define('proprietario', {
-    codProprietario: {
+const endereco = require('../endereco/modeloEndereco');
+const Corretor = conexao.define('corretor', {
+    codCorretor: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -23,7 +22,7 @@ const Proprietario = conexao.define('proprietario', {
                     allowNull: true
                 },
                     dataNascimento: {
-                        type: Date,
+                        type: Sequelize.DATE,
                         allowNull: false
                     },
                         codEndereco: {
@@ -32,15 +31,15 @@ const Proprietario = conexao.define('proprietario', {
                             references: {
                                 model: endereco,
                                 key: 'codEndereco'
-                            },
-                            onDelete: 'CASCADE'
-                        }
+                            }
+                        },
+                        onDelete: 'CASCADE'
 }, {
     timestamps: false
 });
 
-Proprietario.sync({
-    alter: true
+Cliente.sync({
+   alter: true
 });
 
-module.exports = Proprietario;
+modeule.exports = Corretor;
